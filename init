@@ -1,0 +1,39 @@
+#!/bin/sh
+# Author: Fox_exe
+# Skype: Fox_experience
+
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+
+echo "# Loading, please wait..."
+echo "# Mounting filesystems..."
+# hide error messages, if kernel already mount /dev
+mount -t devtmpfs -o size=10M,mode=0755 udev /dev > /dev/null 2>&1
+mkdir -p /dev/pts
+mount -t devpts -o noexec,nosuid,gid=5,mode=0620 devpts /dev/pts > /dev/null 2>&1
+mount -t sysfs -o nodev,noexec,nosuid sysfs /sys
+mount -t tmpfs -o "nosuid,size=20%,mode=0755" tmpfs /run
+mount -t proc -o nodev,noexec,nosuid proc /proc
+
+echo "# Starting mdadm..."
+mdadm -As
+
+echo "# Starting network..."
+ifup -a
+sleep 1
+
+echo "# Starting telnet server..."
+telnetd -l /bin/ash
+
+echo "# Starting web server..."
+httpd
+
+echo "# Turn on LEDs..."
+led init 0
+led hdd1 on
+led hdd2 on
+
+echo "# Running shell..."
+exec 0</dev/console
+exec 1>/dev/console
+exec 2>/dev/console
+exec setsid cttyhack ash
