@@ -30,7 +30,7 @@ if [ $DATA != "" ]; then
 	eval $(cgi_decodevar $(echo $DATA | cut -d'=' -f2)) 2>&1 > tmp/shelloutput
 fi
 
-echo "<pre>`cat tmp/shelloutput`</pre>"
+echo "<pre><code>`cat tmp/shelloutput`</code></pre>"
 echo "<form method=\"post\" action=\"?p=shell\">
 	<input type=\"text\" name=\"cmd\">
 	<input type=\"submit\" value=\"Run!\">

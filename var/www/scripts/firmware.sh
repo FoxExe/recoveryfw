@@ -16,7 +16,7 @@ sed '1,4d' tmp/uploaded | sed '$d' > tmp/normalfile
 cat > tmp/uploaded
 
 FILEINFO=`md5sum tmp/normalfile`
-echo "<b>MD5 hash of uploaded file:</b>$FILEINFO<br>"
+echo "<b>MD5 hash of uploaded file:</b> $FILEINFO<br>"
 
 #TODO: 
 # 1. Untar file
@@ -31,4 +31,4 @@ echo "<form method=\"post\" action=\"?p=firmware\" enctype=\"multipart/form-data
 </form>"
 
 echo "<b>Install log</b><br>"
-echo "<pre id=\"fwinstallog\">`cat tmp/fwinstalllog`</pre>"
+echo "<pre id=\"fwinstallog\"><code>`cat tmp/fwinstalllog`</code></pre>"

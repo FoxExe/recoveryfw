@@ -9,12 +9,12 @@ for disk in /dev/sd?
 do
 	if [ -b $disk ]; then
 		echo "<h1>Found $disk, info:</h1>"
-		echo "<pre>`parted $disk --script "p q" 2>&1`</pre>"
+		echo "<pre><code>`parted $disk --script "p q" 2>&1`</code></pre>"
 	fi
 done
 
 echo "<hr>"
-echo "<h1>Raid(s) status:</h1><pre>`cat /proc/mdstat 2>&1`</pre>"
+echo "<h1>Raid(s) status:</h1><pre><code>`cat /proc/mdstat 2>&1`</code></pre>"
 
 echo "<hr>"
-echo "<h1>Mount points and disk usage:</h1><pre>`df -h 2>&1`</pre>"
+echo "<h1>Mount points and disk usage:</h1><pre><code>`df -h 2>&1`</code></pre>"
